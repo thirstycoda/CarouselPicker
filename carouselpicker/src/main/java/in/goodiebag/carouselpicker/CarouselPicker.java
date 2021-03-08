@@ -122,11 +122,8 @@ public class CarouselPicker extends ViewPager {
 
     @Override
     public void setAdapter(PagerAdapter adapter) {
-        super.setAdapter(adapter);
-        this.setOffscreenPageLimit(adapter.getCount());
-
         CarouselViewAdapter carouselAdapter = ((CarouselViewAdapter)adapter);
-        carouselAdapter.setOpactiy(opacity);
+        carouselAdapter.setOpacity(opacity);
         carouselAdapter.setTextMaxLines(textMaxLines);
         carouselAdapter.setOnPageClickedListener(new CarouselViewAdapter.OnPageClickedListener() {
             @Override
@@ -134,6 +131,9 @@ public class CarouselPicker extends ViewPager {
                 setCurrentItem(position);
             }
         });
+
+        super.setAdapter(adapter);
+        this.setOffscreenPageLimit(adapter.getCount());
     }
 
     public static class CarouselViewAdapter extends PagerAdapter {
@@ -254,10 +254,10 @@ public class CarouselPicker extends ViewPager {
             return (view == object);
         }
 
-        private void setOpactiy(float opactiy) {
-            opactiy = Math.max(opactiy, 0);
-            opactiy = Math.min(opactiy, 1);
-            this.opacity = opactiy;
+        private void setOpacity(float opacity) {
+            opacity = Math.max(opacity, 0);
+            opacity = Math.min(opacity, 1);
+            this.opacity = opacity;
         }
 
         private void applyOpacity(int position) {
